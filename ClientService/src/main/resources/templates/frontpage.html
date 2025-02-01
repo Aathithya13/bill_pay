@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #007bff, #6610f2);
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            color: #000;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        .container h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #333;
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bill Module</h1>
+        <div class="btn-container">
+            <a href="/generateBill" class="btn">Add Bill to Appointment</a>
+            
+			<a href="/updateBillStatus" class="btn">Update Bill Status</a>
+			<a href="/searchByBillId" class="btn">Search Bill by Bill ID</a>
+            <a href="/searchByPatientId" class="btn">Search Bill by Patient ID</a>
+            <a href="/searchByDate" class="btn">Search Bill by Date</a>
+			<a href="/viewpayments" class="btn">View Payments</a>
+        </div>
+    </div>
+</body>
+</html>
