@@ -4,6 +4,9 @@
     <title>Payments</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	
+
     <style>
         body {
             background: linear-gradient(to bottom, #e3f2fd, #ffffff);
@@ -133,6 +136,11 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
     </style>
 
     <script>
@@ -158,13 +166,15 @@
 
 <body>
     <div class="container">
-        <h1>Payments Management</h1>
+        <h1><i class="fas fa-hospital"></i> Payment Dashboard</h1>
 
-        <!-- Search Form -->
-        <form method="get" class="form-inline">
-            <div class="form-group mr-sm-3">
-				<!-- Bill ID Search -->
-				<input class="form-control mr-sm-2" type="search" name="billId" placeholder="Search by Bill ID" aria-label="Search">
+        <form class="form-inline" id="searchForm" method="get" action="/searchbypayment">
+           
+				<div class="form-group mr-sm-3 position-relative">
+					            <input class="form-control mr-sm-2 pl-5" type="search" name="billId" placeholder="Search by Bill ID" aria-label="Search">
+					            <i class="fas fa-search position-absolute" style="left: 15px; top: 50%; transform: translateY(-50%);"></i>
+					      
+
                 <label for="paymentMethod">Payment Method:</label>
                 <select class="form-control" name="paymentMethod" id="paymentMethod">
                     <option value="" selected>Select Payment Method</option>
@@ -175,12 +185,11 @@
                 </select>
             </div>
 
-            <button class="btn btn-outline-success" th:formaction="@{/searchbypayment}" type="submit">Search</button>
+            <button class="btn btn-outline-success" type="submit">Search</button>
             <a th:href="@{/payments}" class="btn btn-outline-primary ml-2">Show All</a>
         </form>
 
-        <!-- Date Range Filter -->
-        <form method="get" class="form-inline mt-3" onsubmit="return validateDateRange(event)">
+        <form method="get" class="form-inline mt-3" onsubmit="return validateDateRange(event)" th:action="@{/searchByPaymentDate}">
             <div class="form-group mr-sm-3">
                 <label for="startDate">Start Date:</label>
                 <input class="form-control" type="date" name="startDate" id="startDate">
@@ -191,19 +200,18 @@
                 <input class="form-control" type="date" name="endDate" id="endDate">
             </div>
 
-            <button class="btn btn-outline-info" th:formaction="@{/searchByPaymentDate}" type="submit">Filter</button>
+            <button class="btn btn-outline-info" type="submit">Filter</button>
         </form>
 
         <div id="dateError" class="error-message mt-2"></div>
 
-        <!-- Payments Table -->
         <table class="table table-striped" th:if="${payments != null and !payments.isEmpty()}">
             <thead>
                 <tr>
-                    <th>Payment Method</th>
-                    <th>Amount</th>
-                    <th>Payment Date</th>
-                    <th>Payment Status</th>
+                    <th><i class="fas fa-credit-card"></i> Payment Method</th>
+                    <th><i class="fas fa-wallet"></i> Amount</th>
+                    <th><i class="fas fa-calendar-alt"></i> Payment Date</th>
+                    <th><i class="fas fa-check-circle"></i> Payment Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -216,18 +224,15 @@
             </tbody>
         </table>
 
-        <!-- No Data Message -->
         <div class="alert alert-warning" th:if="${payments == null or payments.isEmpty()}">
-            No payment records found.
+            No payments found for the given search criteria.
         </div>
 
-        <!-- Error Message -->
         <div class="alert alert-danger" th:if="${errorMessage != null}">
             <strong>Error!</strong> <span th:text="${errorMessage}"></span>
         </div>
 
-        <!-- Back to Home -->
-        <a th:href="@{/}" class="btn btn-outline-secondary mt-4">Back to Home</a>
+        <a th:href="@{/}" class="btn btn-outline-secondary mt-4"><i class="fas fa-home"></i> Back to Home</a>
     </div>
 
     <div class="footer">
