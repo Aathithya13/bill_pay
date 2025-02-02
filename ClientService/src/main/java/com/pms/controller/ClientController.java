@@ -297,57 +297,60 @@ public class ClientController {
 
 	    // Check if any bills are returned
 	    if (bills != null && !bills.isEmpty()) {
-	        model.addAttribute("bills", bills);
-	        return "patient_list";  // Update this with the view name where you want to display the list
+	    	 model.addAttribute("bills", bills);
+		        model.addAttribute("patient_id", patientId);
+		        return "patient_list";
+	      
 	    } else {
 	        model.addAttribute("errorMessage", "No bills found for the given Patient ID.");
 	        return "statuspage";
 	    }
 	}
+		@RequestMapping(value = "/findBillByDate", method = RequestMethod.GET)
+		public String findBillByDate1(@RequestParam("billDate") LocalDate billDate, Model model) {
+			    List<Bill> bills = null;
 
-	@RequestMapping(value = "/findBillByDate", method = RequestMethod.GET)
-	public String findBillByDate(@RequestParam("billDate") LocalDate billDate, Model model) {
-		    List<Bill> bills = null;
+		    // Modify URL to fetch the list of bills for the given Patient ID
+			    String url = "http://localhost:8080/bills/date/" + billDate;
+				  
+		    HttpHeaders headers = new HttpHeaders();
+		    headers.set("Content-Type", "application/json");
 
-	    // Modify URL to fetch the list of bills for the given Patient ID
-		    String url = "http://localhost:8080/bills/date/" + billDate;
-			  
-	    HttpHeaders headers = new HttpHeaders();
-	    headers.set("Content-Type", "application/json");
+		    try {
+		        // Send the GET request to fetch the list of bills
+		        ResponseEntity<List<Bill>> response = restTemplate().exchange(
+		            url,
+		            HttpMethod.GET,
+		            null,
+		            new ParameterizedTypeReference<List<Bill>>() {}
+		        );
 
-	    try {
-	        // Send the GET request to fetch the list of bills
-	        ResponseEntity<List<Bill>> response = restTemplate().exchange(
-	            url,
-	            HttpMethod.GET,
-	            null,
-	            new ParameterizedTypeReference<List<Bill>>() {}
-	        );
+		        if (response != null && response.getBody() != null) {
+		            bills = response.getBody();
+		        }
+		    } catch (HttpClientErrorException e) {
+		        model.addAttribute("errorMessage", "Client error: " + e.getMessage());
+		        return "statuspage";
+		    } catch (HttpServerErrorException e) {
+		        model.addAttribute("errorMessage", "Server error: " + e.getMessage());
+		        return "statuspage";
+		    } catch (Exception e) {
+		        model.addAttribute("errorMessage", "Unexpected error: " + e.getMessage());
+		        return "statuspage";
+		    }
 
-	        if (response != null && response.getBody() != null) {
-	            bills = response.getBody();
-	        }
-	    } catch (HttpClientErrorException e) {
-	        model.addAttribute("errorMessage", "Client error: " + e.getMessage());
-	        return "statuspage";
-	    } catch (HttpServerErrorException e) {
-	        model.addAttribute("errorMessage", "Server error: " + e.getMessage());
-	        return "statuspage";
-	    } catch (Exception e) {
-	        model.addAttribute("errorMessage", "Unexpected error: " + e.getMessage());
-	        return "statuspage";
-	    }
-
-	    // Check if any bills are returned
-	    if (bills != null && !bills.isEmpty()) {
-	        model.addAttribute("bills", bills);
-	        return "patient_list";  
-	    } else {
-	        model.addAttribute("errorMessage", "No bills found for the given Patient ID.");
-	        return "statuspage";
-	    }
-	}
-    
+		    // Check if any bills are returned
+		    if (bills != null && !bills.isEmpty()) {
+		        model.addAttribute("bills", bills);
+		        model.addAttribute("date", billDate);
+		        return "date_list";  
+		    } else {
+		        model.addAttribute("errorMessage", "No bills found for the given Patient ID.");
+		        return "statuspage";
+		    }
+		}
+	    
+	
 
 	
 	
