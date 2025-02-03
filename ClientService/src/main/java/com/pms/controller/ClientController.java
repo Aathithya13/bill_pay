@@ -446,9 +446,11 @@ public class ClientController {
     public String searchPayments(
             @RequestParam(required = false) Integer billId,
             @RequestParam(required = false) String paymentMethod,
+            @RequestParam(required = false) String paymentStatus,
             Model model) {
         try {
             logger.info("Payment Method: " + paymentMethod);
+            logger.info("Payment Status: " + paymentStatus);
 
             UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(backendUrl + "/searchbypayment");
             if (billId != null) {
@@ -456,6 +458,9 @@ public class ClientController {
             }
             if (paymentMethod != null && !paymentMethod.isEmpty()) {
                 builder.queryParam("paymentMethod", paymentMethod);
+            }
+            if (paymentStatus != null && !paymentStatus.isEmpty()) {
+                builder.queryParam("paymentStatus", paymentStatus);
             }
 
             String queryUrl = builder.toUriString();

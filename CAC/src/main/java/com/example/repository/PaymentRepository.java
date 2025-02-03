@@ -16,4 +16,5 @@ public interface PaymentRepository extends JpaRepository<Payment, String> {
 	    List<Payment> findByPaymentMethod(String paymentMethod);
 	    Optional<Payment> findByRazorpayOrderId(String razorpayOrderId);
 	    List<Payment> findByPaymentDateBetween(LocalDate startDate, LocalDate endDate);
+	    List<Payment> findByPaymentStatus(String paymentStatus);
 }

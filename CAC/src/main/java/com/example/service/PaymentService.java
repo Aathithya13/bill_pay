@@ -61,6 +61,9 @@ public class PaymentService {
         payments.sort(Comparator.comparing(payment -> payment.getBill().getBillId()));
         return payments;
     }
+    public List<Payment> getPaymentsByPaymentStatus(String paymentStatus) {
+        return paymentRepository.findByPaymentStatus(paymentStatus);
+    }
 
     public List<Payment> getAllPayments() {
     	 List<Payment> payments = paymentRepository.findAll();

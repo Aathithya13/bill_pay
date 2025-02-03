@@ -187,10 +187,14 @@ public class PaymentController {
     @GetMapping("/searchbypayment")
     public ResponseEntity<?> searchByCriteria(
             @RequestParam(required = false) Integer billId,
-            @RequestParam(required = false) String paymentMethod) {
+            @RequestParam(required = false) String paymentMethod,
+            @RequestParam(required = false) String paymentStatus) {
         try {
             if (paymentMethod != null) {
                 paymentMethod = URLDecoder.decode(paymentMethod, StandardCharsets.UTF_8);
+            }
+            if (paymentStatus != null) {
+                paymentStatus = URLDecoder.decode(paymentStatus, StandardCharsets.UTF_8);
             }
             if (billId != null) {
                 List<Payment> payments = paymentService.getPaymentsByBillId(billId);
@@ -204,7 +208,13 @@ public class PaymentController {
                     throw new UserNotFoundException("No payments found for the payment method: " + paymentMethod);
                 }
                 return ResponseEntity.ok(payments);
-            } else if (billId == null && (paymentMethod == null || paymentMethod.isEmpty())) {
+            } else if (paymentStatus != null && !paymentStatus.isEmpty()) {
+                List<Payment> payments = paymentService.getPaymentsByPaymentStatus(paymentStatus);
+                if (payments.isEmpty()) {
+                    throw new UserNotFoundException("No payments found for the payment status: " + paymentStatus);
+                }
+                return ResponseEntity.ok(payments);
+            } else if (billId == null && (paymentMethod == null || paymentMethod.isEmpty()) && (paymentStatus == null || paymentStatus.isEmpty())) {
                 List<Payment> allPayments = paymentService.getAllPayments();
                 if (allPayments.isEmpty()) {
                     throw new UserNotFoundException("No payments found in the system.");
@@ -212,7 +222,7 @@ public class PaymentController {
                 return ResponseEntity.ok(allPayments);
             } else {
                 return ResponseEntity.badRequest()
-                        .body("Error! Please provide valid search criteria (Bill ID or Payment Method).");
+                        .body("Error! Please provide valid search criteria (Bill ID, Payment Method, or Payment Status). ");
             }
         } catch (UserNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -222,6 +232,7 @@ public class PaymentController {
                     .body("An error occurred while processing your request.");
         }
     }
+
 
     @CrossOrigin(origins = "http://localhost:9093")
     @GetMapping("/searchByDate")
