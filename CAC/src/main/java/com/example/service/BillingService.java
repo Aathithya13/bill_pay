@@ -49,7 +49,23 @@ public class BillingService {
         if (b!=null) {
             throw new IllegalArgumentException("A bill already exists for this appointment.");
         }   
-        
+	    double totalAmount = bill.getConsultationFees() +
+                bill.getMedicineFees() +
+                bill.getTestCharges() +
+                bill.getMiscellaneousCharge();
+
+	    float discountPercentage = (totalAmount >= 100000) ? 20 : (totalAmount >= 1000) ? 10 : 0;
+
+	    double discount = (totalAmount * discountPercentage) / 100;
+	    double taxableAmount = totalAmount - discount;
+	    float taxPercentage = 2;
+	    double finalAmount = taxableAmount + (taxableAmount * taxPercentage) / 100;
+
+	    bill.setTotalamount(totalAmount);
+	    bill.setDiscountPercentage(discountPercentage);
+	    bill.setTaxableamount(taxableAmount);
+	    bill.setTaxPercentage(taxPercentage);
+	    bill.setFinalamount(finalAmount);
 	    // Set the appointment to the bill
 	    bill.setAppointment(appointment);
 

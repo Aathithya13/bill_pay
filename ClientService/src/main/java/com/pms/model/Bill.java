@@ -26,7 +26,7 @@ public class Bill {
 	private  float discountPercentage;
 	
 	
-	private boolean tax;
+//	private boolean tax;
 	private  double consultationFees;
 	private  double medicineFees;
 	private  double testCharges;
@@ -36,7 +36,8 @@ public class Bill {
 	
 	private  Set<Payment> payList;
 	
-	
+    private float taxPercentage;
+    private double taxableamount;
 	
 	
 	public Set<Payment> getPayList() {
@@ -124,19 +125,31 @@ public class Bill {
 	public void setDiscountPercentage(float discountPercentage) {
 		this.discountPercentage = discountPercentage;
 	}
-	public boolean isTax() {
-		return tax;
+	public float getTaxPercentage() {
+		return taxPercentage;
 	}
-	public void setTax(boolean tax) {
-		this.tax = tax;
+	public void setTaxPercentage(float taxPercentage) {
+		this.taxPercentage = taxPercentage;
 	}
+	public double getTaxableamount() {
+		return taxableamount;
+	}
+	public void setTaxableamount(double taxableamount) {
+		this.taxableamount = taxableamount;
+	}
+//	public boolean isTax() {
+//		return tax;
+//	}
+//	public void setTax(boolean tax) {
+//		this.tax = tax;
+//	}
 	@Override
 	public String toString() {
 		return "Bill [billId=" + billId + ", billDate=" + billDate + ", appointment=" + appointment
 				+ ", consultationFees=" + consultationFees + ", medicineFees=" + medicineFees + ", testCharges="
 				+ testCharges + ", miscellaneousCharge=" + miscellaneousCharge + ", description=" + description
 				+ ", isInsuranceApplicable=" + isInsuranceApplicable + ", discountPercentage=" + discountPercentage
-				+ ", tax=" + tax + ", totalamount=" + totalamount + ", finalamount=" + finalamount + ", paymentstatus="
+				+ ", taxPercentage=" + taxPercentage + ", taxableamount=" + taxableamount + ", totalamount=" + totalamount + ", finalamount=" + finalamount + ", paymentstatus="
 				+ paymentstatus + "]";
 	}
 	

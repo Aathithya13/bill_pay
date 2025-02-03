@@ -152,9 +152,17 @@
                     <p th:text="${bill.totalamount}"></p>
                 </div>
 				<div>
-				                   <strong>Discount (%)</strong>
-				                   <p th:text="${bill.discountPercentage}"></p>
-				  </div>
+				     <strong>Discount (%)</strong>
+				     <p th:text="${bill.discountPercentage}"></p>
+				 </div>
+				 <div>
+				      <strong>Taxable Amount</strong>
+				      <p th:text="${bill.taxableamount}"></p>
+				   </div>
+				   <div>
+				        <strong>Tax (%)</strong>
+				        <p th:text="${bill.taxPercentage}"></p>
+				     </div>
                 <div>
                     <strong>Final Amount</strong>
                     <p th:text="${bill.finalamount}"></p>
