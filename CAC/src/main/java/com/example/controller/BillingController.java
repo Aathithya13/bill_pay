@@ -51,28 +51,17 @@ public class BillingController {
 	public ResponseEntity<?> createBill(@RequestBody Bill bill, @PathVariable int appointmentId) throws BillNotFoundException,NullPointerException,IllegalArgumentException,MessagingException,Exception{
 		
 
-	  //  try {
+	  
 	    	System.out.println("Bill: " + bill);
 			System.out.println("Appointment ID: " + appointmentId);
 	        Bill savedBill = billingService.createBill(bill, appointmentId);
 	        
 	        
 	        // Send the email
-	        
-	        	emailNotificationService.sendBillEmail(savedBill);
+	        emailNotificationService.sendBillEmail(savedBill);
 	       
 	        return ResponseEntity.status(HttpStatus.CREATED).body(savedBill); // Return 201 
-	   /* }
-	    catch (IllegalArgumentException ex) {
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
-	    }*/
-	  /*  catch (BillNotFoundException ex) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
-	    }*/
-	    
-	  /*  catch (Exception ex) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + ex.getMessage());
-	    }*/
+	 
 	}
     //http://localhost:8080/bills/5
 	
@@ -82,29 +71,16 @@ public class BillingController {
 		public ResponseEntity<?> updateBillById(@RequestBody Bill bill,@PathVariable int billId) throws BillNotFoundException,NullPointerException,IllegalArgumentException,Exception{
 			
 			Bill b = billingService.updatePaymentStatus(billId, bill.getPaymentstatus());
-	        return ResponseEntity.ok(b); // Return 200 OK
-	        
-			/* try {
-		        Bill b = billingService.updatePaymentStatus(billId, bill.getPaymentstatus());
-		        return ResponseEntity.ok(b); // Return 200 OK
-		    } catch (ResourceNotFoundException ex) {
-		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage()); // Return 404 Not Found
-		    } catch (Exception ex) {
-		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + ex.getMessage());
-		    }*/
+	        return ResponseEntity.ok(b); // Return 200 Ok
 		}
 
 	//searchBillbyBillId
 	@GetMapping("/bills/{billId}")
 	public ResponseEntity<?> getBillById(@PathVariable int billId) throws ResourceNotFoundException,Exception{
-	  //  try {
+	
 	        Bill bill = billingService.getBillById(billId);
 	        return ResponseEntity.ok(bill); // Return 200 OK
-	  /*  } catch (ResourceNotFoundException ex) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage()); // Return 404 Not Found
-	    } catch (Exception ex) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + ex.getMessage());
-	    }*/
+	  
 	}
 	//http://localhost:8080/bills/2
 	
@@ -151,19 +127,7 @@ public class BillingController {
     //http://localhost:8080/bills/date/2024-12-20
 	
 	
-	// Update bill status
-   /* @PutMapping("/update/{billId}")
-    public ResponseEntity<Bill> updateBillStatus(@PathVariable int billId, @RequestBody Bill updatedBill) {
-        Optional<Bill> billOptional = billRepository.findById(billId);
-        if (billOptional.isPresent()) {
-            Bill bill = billOptional.get();
-            bill.setPaymentstatus(updatedBill.getPaymentstatus());
-            // You can update other fields if needed.
-            billRepository.save(bill);
-            return ResponseEntity.ok(bill);
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }*/
+	
 	
 	
 }
