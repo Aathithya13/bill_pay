@@ -102,12 +102,7 @@ public class ClientController {
      //http://localhost:8080/bills/2
      @RequestMapping(value = "/bills/{appointmentId}", method = RequestMethod.POST)
      public String submitNewBill(@PathVariable("appointmentId") int appointmentId, @ModelAttribute("bill") Bill bill, Model model) throws JsonMappingException, JsonProcessingException {
-      /*   if(bill==null)
-         { 
-        	 model.addAttribute("errorMessage", "Something went wrong: Resource not found.");
-             return "statuspage"; 
-        	 
-         }*/
+     
     	 Bill billobj = null;
          System.out.println("AppointmentId -" + appointmentId);
          model.addAttribute("appointmentId", appointmentId);
