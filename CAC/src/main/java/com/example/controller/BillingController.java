@@ -63,7 +63,7 @@ public class BillingController {
 	        return ResponseEntity.status(HttpStatus.CREATED).body(savedBill); // Return 201 
 	 
 	}
-    //http://localhost:8080/bills/5
+    //http://localhost:8082/bills/5
 	
 	
 	//updatebillById
@@ -82,7 +82,7 @@ public class BillingController {
 	        return ResponseEntity.ok(bill); // Return 200 OK
 	  
 	}
-	//http://localhost:8080/bills/2
+	//http://localhost:8082/bills/2
 	
 	
 	
@@ -100,7 +100,7 @@ public class BillingController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + ex.getMessage());
 	    }
 	}
-    //http://localhost:8080/bills/patient/103
+    //http://localhost:8082/bills/patient/103
 	
 	
 	
@@ -124,7 +124,7 @@ public class BillingController {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred: " + ex.getMessage());
 	    }
 	}
-    //http://localhost:8080/bills/date/2024-12-20
+    //http://localhost:8082/bills/date/2024-12-20
 	
 	
 	

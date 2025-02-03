@@ -24,6 +24,6 @@ public class AppointmentController {
 
 		return new ResponseEntity<>(appointmentService.addAppointment(appointment), HttpStatus.OK);
 	}
-	//http://localhost:8080/addAppointment
+	//http://localhost:8082/addAppointment
 	
 }
