@@ -25,33 +25,7 @@ public class EmailNotificationService {
     private TemplateEngine templateEngine; // Thymeleaf TemplateEngine
     
    
-  //bill email service
- /*   public void sendBillEmail(Bill bill) throws MessagingException {
-        String emailBody = generateBillEmailBody(bill);
-
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true);
-        //email address
-        //helper.setTo(bill.getAppointment().getPatientEmail());
-        helper.setTo("anshitagupta2277@gmail.com");
-        helper.setSubject("Your Bill Details");
-        helper.setText(emailBody, true);
-
-        // Optional: Attach a PDF or other file
-        // helper.addAttachment("Bill.pdf", new File("path_to_file"));
-
-        mailSender.send(message);
-    }
-    private String generateBillEmailBody(Bill bill) {
-        return "<h1>Bill Details</h1>" +
-               "<p>Bill ID: " + bill.getBillId() + "</p>" +
-               "<p>Date: " + bill.getBillDate() + "</p>" +
-               "<p>Consultation Fees: " + bill.getConsultationFees() + "</p>" +
-               "<p>Medicine Fees: " + bill.getMedicineFees() + "</p>" +
-               "<p>Total Amount: " + bill.getTotalamount()+ "</p>" +
-               "<p>Final Amount: " + bill.getFinalamount() + "</p>" +
-               "<p>Thank you for choosing our services.</p>";
-    }*/
+ 
     public void sendBillEmail(Bill bill) throws MessagingException {
         Context context = new Context();
         context.setVariable("bill", bill); // Set the Bill object for template rendering
