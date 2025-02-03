@@ -133,42 +133,43 @@ public class EmailNotificationService {
             System.err.println("Error sending failure email: " + e.getMessage());
         }
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //payment email service
-    public void sendPaymentSuccessEmail(String toEmail, String paymentId, String orderId, double amount) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(toEmail);
-        message.setSubject("Payment Successful");
-        message.setText("Dear User,\n\nYour payment was successful.\n\n" +
-                "Payment Details:\n" +
-                "Payment ID: " + paymentId + "\n" +
-                "Order ID: " + orderId + "\n" +
-                "Amount: ₹" + amount + "\n\nThank you for your payment.\n\n" +
-                "Regards,\nCareAndCure Team");
-
-        mailSender.send(message);
-    }
-
-    public void sendPaymentFailureEmail(String toEmail, String orderId, String failureReason) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(toEmail);
-        message.setSubject("Payment Failed");
-        message.setText("Dear User,\n\nUnfortunately, your payment attempt was not successful.\n\n" +
-                "Order ID: " + orderId + "\n" +
-                "Reason: " + failureReason + "\n\n" +
-                "Please try again or contact our support team for assistance.\n\n" +
-                "Regards,\nCareAndCure Team");
-
-        mailSender.send(message);
-    }
 }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    //payment email service
+//    public void sendPaymentSuccessEmail(String toEmail, String paymentId, String orderId, double amount) {
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setTo(toEmail);
+//        message.setSubject("Payment Successful");
+//        message.setText("Dear User,\n\nYour payment was successful.\n\n" +
+//                "Payment Details:\n" +
+//                "Payment ID: " + paymentId + "\n" +
+//                "Order ID: " + orderId + "\n" +
+//                "Amount: ₹" + amount + "\n\nThank you for your payment.\n\n" +
+//                "Regards,\nCareAndCure Team");
+//
+//        mailSender.send(message);
+//    }
+//
+//    public void sendPaymentFailureEmail(String toEmail, String orderId, String failureReason) {
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setTo(toEmail);
+//        message.setSubject("Payment Failed");
+//        message.setText("Dear User,\n\nUnfortunately, your payment attempt was not successful.\n\n" +
+//                "Order ID: " + orderId + "\n" +
+//                "Reason: " + failureReason + "\n\n" +
+//                "Please try again or contact our support team for assistance.\n\n" +
+//                "Regards,\nCareAndCure Team");
+//
+//        mailSender.send(message);
+//    }
+//}

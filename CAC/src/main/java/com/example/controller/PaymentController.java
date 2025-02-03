@@ -165,13 +165,14 @@ public class PaymentController {
     @PostMapping("/notifyFailure")
     @ResponseBody
     public Map<String, String> notifyFailure(@RequestBody Map<String, Object> payload) {
-        String billId = (String) payload.get("billId");
-        String message = (String) payload.get("message");
-
         Map<String, String> response = new HashMap<>();
         try {
+            
+        	int billId = Integer.parseInt(payload.get("billId").toString());
+            String orderId = (String) payload.get("orderId");
+            String failureReason = (String) payload.get("message");
             String userEmail = "aathi22004@gmail.com"; 
-            emailNotificationService.sendPaymentFailureEmail(userEmail, billId, message);
+            emailNotificationService.sendPaymentFailureEmail(userEmail, orderId, failureReason, billId);
 
             response.put("message", "Failure notification sent successfully!");
             response.put("status", "success");
