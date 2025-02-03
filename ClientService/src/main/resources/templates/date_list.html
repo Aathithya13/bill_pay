@@ -120,7 +120,7 @@
                         <th>Test Charges</th>
                         <th>Miscellaneous Charge</th>
                         <th>Discount (%)</th>
-                        <th>Tax</th>
+                        <!-- <th>Tax</th> -->
                         <th>Total Amount</th>
                         <th>Final Amount</th>
                         <th>Doctor ID</th>
@@ -138,7 +138,7 @@
                         <td th:text="${bill.miscellaneousCharge}"></td>
                        
                         <td th:text="${bill.discountPercentage}"></td>
-                        <td th:text="${bill.tax} ? 'Yes' : 'No'"></td>
+                        <!-- <td th:text="${bill.tax} ? 'Yes' : 'No'"></td> -->
                         <td th:text="${bill.totalamount}"></td>
                         <td th:text="${bill.finalamount}"></td>
                         <td th:text="${bill.appointment.doctorId}"></td>

@@ -50,10 +50,12 @@ public class Bill {
 	@JsonManagedReference
 	private  Set<Payment> payList;
 	
-	private boolean tax;
+//	private boolean tax;
+    private float taxPercentage;
+    private double taxableamount;
 	
 	private double totalamount;
-	private Double finalamount;
+	private double finalamount;
 	private String paymentstatus;
 	
 	
@@ -82,7 +84,7 @@ public class Bill {
 	public void setTotalamount(double totalamount) {
 		this.totalamount = totalamount;
 	}
-	public Double getFinalamount() {
+	public double getFinalamount() {
 		return finalamount;
 	}
 	public void setFinalamount(Double finalamount) {
@@ -143,11 +145,23 @@ public class Bill {
 	public void setDiscountPercentage(float discountPercentage) {
 		this.discountPercentage = discountPercentage;
 	}
-	public boolean isTax() {
-		return tax;
+//	public boolean isTax() {
+//		return tax;
+//	}
+//	public void setTax(boolean tax) {
+//		this.tax = tax;
+//	}
+	public float getTaxPercentage() {
+		return taxPercentage;
 	}
-	public void setTax(boolean tax) {
-		this.tax = tax;
+	public void setTaxPercentage(float taxPercentage) {
+		this.taxPercentage = taxPercentage;
+	}
+	public double getTaxableamount() {
+		return taxableamount;
+	}
+	public void setTaxableamount(double taxableamount) {
+		this.taxableamount = taxableamount;
 	}
 	@Override
 	public String toString() {
@@ -155,7 +169,7 @@ public class Bill {
 				+ ", consultationFees=" + consultationFees + ", medicineFees=" + medicineFees + ", testCharges="
 				+ testCharges + ", miscellaneousCharge=" + miscellaneousCharge + ", description=" + description
 				+ ", isInsuranceApplicable=" + isInsuranceApplicable + ", discountPercentage=" + discountPercentage
-				+ ", payList=" + payList + ", tax=" + tax + ", totalamount=" + totalamount + ", finalamount="
+				+ ", payList=" + payList + ", taxPercentage=" + taxPercentage + ", taxableamount=" + taxableamount + ", totalamount=" + totalamount + ", finalamount="
 				+ finalamount + ", paymentstatus=" + paymentstatus + "]";
 	}
 	public double getAmountPaid() {

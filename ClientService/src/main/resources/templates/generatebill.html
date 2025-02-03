@@ -140,12 +140,13 @@
                         <option value="false">No</option>
                     </select>
                 </div>
-                
+				<!--
                 <div class="form-group">
                     <label for="discountPercentage">Discount Percentage:</label>
                     <input type="number" name="discountPercentage" placeholder="Enter Discount %" step="0.01" required>
                 </div>
                 
+				
                 <div class="form-group">
                     <label for="tax">Tax:</label>
                     <select name="tax" required>
@@ -153,7 +154,7 @@
                         <option value="false">No</option>
                     </select>
                 </div>
-                
+                -->
                 <div class="form-group">
                     <label for="description">Description:</label>
                     <input type="text" name="description" placeholder="Enter Description" required>
@@ -162,11 +163,14 @@
                 <div class="form-group">
                     <label for="paymentStatus">Payment Status:</label>
                     <select name="paymentstatus" required>
+						<option value="unpaid">Unpaid</option>
                         <option value="paid">Paid</option>
-                        <option value="unpaid">Unpaid</option>
+
                         <option value="partially_paid">Partially Paid</option>
                     </select>
                 </div>
+				
+				<!--
                 
                 <div class="form-group">
                     <label for="totalAmount">Total Amount:</label>
@@ -177,6 +181,7 @@
                     <label for="finalAmount">Final Amount:</label>
                     <input type="number" name="finalamount" placeholder="Enter Final Amount" required>
                 </div>
+				-->
             </div>
             
             <div class="button-row">
