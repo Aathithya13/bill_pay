@@ -129,22 +129,22 @@ public class ClientController {
         	 if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
                  // 404 error
                  model.addAttribute("errorMessage", "Pls Enter Valid Appointment Id  ");
-                 return "statuspage"; 
+                 return "statuspage_bill"; 
              } 
              // Handle client errors (4xx)
              ObjectMapper objectMapper = new ObjectMapper();
              JsonNode rootNode = objectMapper.readTree(e.getResponseBodyAsString());
              String errorMessage = rootNode.path("message").asText();
              model.addAttribute("errorMessage", errorMessage);
-             return "statuspage"; // Redirect to an error page
+             return "statuspage_bill"; // Redirect to an error page
          } catch (HttpServerErrorException e) {
              // Handle server errors (5xx)
              model.addAttribute("errorMessage", "Server error: " + e.getMessage());
-             return "statuspage"; // Redirect to an error page
+             return "statuspage_bill"; // Redirect to an error page
          } catch (Exception e) {
              // Handle unexpected errors
              model.addAttribute("errorMessage", "Unexpected error: " + e.getMessage());
-             return "statuspage"; // Redirect to an error page
+             return "statuspage_bill"; // Redirect to an error page
          }
 
          // If the bill was created successfully, show a success page
@@ -155,7 +155,7 @@ public class ClientController {
          } else {
              // If the bill wasn't created, show an error message
              model.addAttribute("errorMessage", "Failed to create the bill. Try again.");
-             return "statuspage"; // Redirect to an error page
+             return "statuspage_bill"; // Redirect to an error page
          }
      }
     
@@ -183,16 +183,16 @@ public class ClientController {
  	    	 if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
                  // 404 error
                  model.addAttribute("errorMessage", "Pls Enter Valid Bill Id  ");
-                 return "statuspage"; 
+                 return "statuspage_bill"; 
              }
  	        model.addAttribute("errorMessage", "Client error: " + e.getMessage());
- 	        return "statuspage";
+ 	        return "statuspage_bill";
  	    } catch (HttpServerErrorException e) {
  	        model.addAttribute("errorMessage", "Server error: " + e.getMessage());
- 	        return "statuspage";
+ 	        return "statuspage_bill";
  	    } catch (Exception e) {
  	        model.addAttribute("errorMessage", "Unexpected error: " + e.getMessage());
- 	        return "statuspage";
+ 	        return "statuspage_bill";
  	    }
 
  	    if (bill != null) {
@@ -200,7 +200,7 @@ public class ClientController {
  	        return "bill_list_updating";
  	    } else {
  	        model.addAttribute("errorMessage", "No bill details found with the given ID.");
- 	        return "statuspage";
+ 	        return "statuspage_bill";
  	    }
  	}
      
@@ -236,13 +236,13 @@ public class ClientController {
  	  
  	    catch (HttpClientErrorException e) {
  	        model.addAttribute("errorMessage", "Client error: " + e.getMessage());
- 	        return "statuspage";
+ 	        return "statuspage_bill";
  	    } catch (HttpServerErrorException e) {
  	        model.addAttribute("errorMessage", "Server error: " + e.getMessage());
- 	        return "statuspage";
+ 	        return "statuspage_bill";
  	    } catch (Exception e) {
  	        model.addAttribute("errorMessage", "Unexpected error: " + e.getMessage());
- 	        return "statuspage";
+ 	        return "statuspage_bill";
  	    }
 
  	   // If the bill was created successfully, show a success page
@@ -252,7 +252,7 @@ public class ClientController {
         } else {
             // If the bill wasn't created, show an error message
             model.addAttribute("errorMessage", "Failed to create the bill. Try again.");
-            return "statuspage"; // Redirect to an error page
+            return "statuspage_bill"; // Redirect to an error page
         }
  	}
     	
@@ -281,13 +281,13 @@ public class ClientController {
 	        }
 	    } catch (HttpClientErrorException e) {
 	        model.addAttribute("errorMessage", "Client error: " + e.getMessage());
-	        return "statuspage";
+	        return "statuspage_bill";
 	    } catch (HttpServerErrorException e) {
 	        model.addAttribute("errorMessage", "Server error: " + e.getMessage());
-	        return "statuspage";
+	        return "statuspage_bill";
 	    } catch (Exception e) {
 	        model.addAttribute("errorMessage", "Unexpected error: " + e.getMessage());
-	        return "statuspage";
+	        return "statuspage_bill";
 	    }
 
 	    // Check if any bills are returned
@@ -298,7 +298,7 @@ public class ClientController {
 	      
 	    } else {
 	        model.addAttribute("errorMessage", "No bills found for the given Patient ID.");
-	        return "statuspage";
+	        return "statuspage_bill";
 	    }
 	}
 		@RequestMapping(value = "/findBillByDate", method = RequestMethod.GET)
@@ -325,13 +325,13 @@ public class ClientController {
 		        }
 		    } catch (HttpClientErrorException e) {
 		        model.addAttribute("errorMessage", "Client error: " + e.getMessage());
-		        return "statuspage";
+		        return "statuspage_bill";
 		    } catch (HttpServerErrorException e) {
 		        model.addAttribute("errorMessage", "Server error: " + e.getMessage());
-		        return "statuspage";
+		        return "statuspage_bill";
 		    } catch (Exception e) {
 		        model.addAttribute("errorMessage", "Unexpected error: " + e.getMessage());
-		        return "statuspage";
+		        return "statuspage_bill";
 		    }
 
 		    // Check if any bills are returned
@@ -341,7 +341,7 @@ public class ClientController {
 		        return "date_list";  
 		    } else {
 		        model.addAttribute("errorMessage", "No bills found for the given Patient ID.");
-		        return "statuspage";
+		        return "statuspage_bill";
 		    }
 		}
 	    
@@ -371,13 +371,13 @@ public class ClientController {
 	        }
 	    } catch (HttpClientErrorException e) {
 	        model.addAttribute("errorMessage", "Client error: " + e.getMessage());
-	        return "statuspage";
+	        return "statuspage_bill";
 	    } catch (HttpServerErrorException e) {
 	        model.addAttribute("errorMessage", "Server error: " + e.getMessage());
-	        return "statuspage";
+	        return "statuspage_bill";
 	    } catch (Exception e) {
 	        model.addAttribute("errorMessage", "Unexpected error: " + e.getMessage());
-	        return "statuspage";
+	        return "statuspage_bill";
 	    }
 
 	    if (bill != null) {
@@ -385,7 +385,7 @@ public class ClientController {
 	        return "bill_list";
 	    } else {
 	        model.addAttribute("errorMessage", "No bill details found with the given ID.");
-	        return "statuspage";
+	        return "statuspage_bill";
 	    }
 	}
 

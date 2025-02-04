@@ -197,31 +197,40 @@ public class PaymentController {
             if (paymentStatus != null) {
                 paymentStatus = URLDecoder.decode(paymentStatus, StandardCharsets.UTF_8);
             }
-            
+
             List<Payment> payments = new ArrayList<>();
-            
+            String message = "No payments found for the provided criteria: ";
+
             if (billId != null && paymentMethod != null && paymentStatus != null) {
                 payments = paymentService.getPaymentsByBillIdAndMethodAndStatus(billId, paymentMethod, paymentStatus);
+                message += "Bill ID = " + billId + ", Payment Method = " + paymentMethod + ", Payment Status = " + paymentStatus;
             } else if (billId != null && paymentMethod != null) {
                 payments = paymentService.getPaymentsByBillIdAndMethod(billId, paymentMethod);
+                message += "Bill ID = " + billId + ", Payment Method = " + paymentMethod;
             } else if (billId != null && paymentStatus != null) {
                 payments = paymentService.getPaymentsByBillIdAndStatus(billId, paymentStatus);
+                message += "Bill ID = " + billId + ", Payment Status = " + paymentStatus;
             } else if (paymentMethod != null && paymentStatus != null) {
                 payments = paymentService.getPaymentsByMethodAndStatus(paymentMethod, paymentStatus);
+                message += "Payment Method = " + paymentMethod + ", Payment Status = " + paymentStatus;
             } else if (billId != null) {
                 payments = paymentService.getPaymentsByBillId(billId);
+                message += "Bill ID = " + billId;
             } else if (paymentMethod != null) {
                 payments = paymentService.getPaymentsByPaymentMethod(paymentMethod);
+                message += "Payment Method = " + paymentMethod;
             } else if (paymentStatus != null) {
                 payments = paymentService.getPaymentsByPaymentStatus(paymentStatus);
+                message += "Payment Status = " + paymentStatus;
             } else {
                 payments = paymentService.getAllPayments();
+                message = "No payments found in the system.";
             }
-            
+
             if (payments.isEmpty()) {
-                throw new UserNotFoundException("No payments found for the provided criteria.");
+                throw new UserNotFoundException(message);
             }
-            
+
             return ResponseEntity.ok(payments);
         } catch (UserNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -231,6 +240,7 @@ public class PaymentController {
                     .body("An error occurred while processing your request.");
         }
     }
+
 
 
 
