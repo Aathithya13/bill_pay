@@ -228,7 +228,7 @@
 
 	            // Proceed with AJAX request if all validations pass
 	            $.ajax({
-	                url: "http://localhost:8080/api/payments/create/" + billId,
+	                url: "http://localhost:8082/api/payments/create/" + billId,
 	                type: "POST",
 	                contentType: "application/json",
 	                data: JSON.stringify({
@@ -248,7 +248,7 @@
 	                        "order_id": payment.razorpayOrderId,
 	                        "handler": function (response) {
 	                            $.ajax({
-	                                url: "http://localhost:8080/api/payments/verify",
+	                                url: "http://localhost:8082/api/payments/verify",
 	                                type: "POST",
 	                                contentType: "application/json",
 	                                data: JSON.stringify({
@@ -287,7 +287,7 @@
 	                            "ondismiss": function () {
 	                                showPaymentStatus('failure', 'Payment not completed!', 'You closed the Razorpay modal without completing the payment.');
 	                                $.ajax({
-	                                    url: "http://localhost:8080/api/payments/notifyFailure",
+	                                    url: "http://localhost:8082/api/payments/notifyFailure",
 	                                    type: "POST",
 	                                    contentType: "application/json",
 	                                    data: JSON.stringify({

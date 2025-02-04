@@ -106,7 +106,7 @@ public class ClientController {
     	 Bill billobj = null;
          System.out.println("AppointmentId -" + appointmentId);
          model.addAttribute("appointmentId", appointmentId);
-         String url = "http://localhost:8080/bills/" + appointmentId;
+         String url = "http://localhost:8082/bills/" + appointmentId;
 
          // Set up headers for the request
          HttpHeaders headers = new HttpHeaders();
@@ -165,7 +165,7 @@ public class ClientController {
  	public String findBillByIdforUpdatingPaymentStatus(@RequestParam("billId") int billId, Model model) {
  	    Bill bill = null;
 
- 	    String url = "http://localhost:8080/bills/" + billId;
+ 	    String url = "http://localhost:8082/bills/" + billId;
  	    HttpHeaders headers = new HttpHeaders();
  	    headers.set("Content-Type", "application/json");
 
@@ -210,7 +210,7 @@ public class ClientController {
     	 Bill billobj = null;
  	    System.out.println("Bill Id for update-"+bill.getBillId());
  	   System.out.println("Bill object"+bill);
- 	    String url = "http://localhost:8080/bills/" + bill.getBillId();
+ 	    String url = "http://localhost:8082/bills/" + bill.getBillId();
  	  
  	// Set up headers for the request
        HttpHeaders headers = new HttpHeaders();
@@ -306,7 +306,7 @@ public class ClientController {
 			    List<Bill> bills = null;
 
 		    // Modify URL to fetch the list of bills for the given Patient ID
-			    String url = "http://localhost:8080/bills/date/" + billDate;
+			    String url = "http://localhost:8082/bills/date/" + billDate;
 				  
 		    HttpHeaders headers = new HttpHeaders();
 		    headers.set("Content-Type", "application/json");
@@ -355,7 +355,7 @@ public class ClientController {
 	public String findBillById(@RequestParam("billId") int billId, Model model) {
 	    Bill bill = null;
 
-	    String url = "http://localhost:8080/bills/" + billId;
+	    String url = "http://localhost:8082/bills/" + billId;
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.set("Content-Type", "application/json");
 
@@ -394,7 +394,7 @@ public class ClientController {
 	
 
 	  private static final Logger logger = Logger.getLogger(ClientController.class.getName());
-	private final String backendUrl = "http://localhost:8080/api/payments";
+	private final String backendUrl = "http://localhost:8082/api/payments";
 
     
 
