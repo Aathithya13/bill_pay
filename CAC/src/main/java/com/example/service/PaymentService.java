@@ -64,6 +64,18 @@ public class PaymentService {
     public List<Payment> getPaymentsByPaymentStatus(String paymentStatus) {
         return paymentRepository.findByPaymentStatus(paymentStatus);
     }
+    public List<Payment> getPaymentsByBillIdAndMethodAndStatus(int billId, String paymentMethod, String paymentStatus) {
+        return paymentRepository.findByBill_BillIdAndPaymentMethodAndPaymentStatus(billId, paymentMethod, paymentStatus);
+    }
+    public List<Payment> getPaymentsByMethodAndStatus(String paymentMethod, String paymentStatus) {
+        return paymentRepository.findByPaymentMethodAndPaymentStatus(paymentMethod, paymentStatus);
+    }
+    public List<Payment> getPaymentsByBillIdAndMethod(Integer billId, String paymentMethod) {
+        return paymentRepository.findByBill_BillIdAndPaymentMethod(billId, paymentMethod);
+    }
+    public List<Payment> getPaymentsByBillIdAndStatus(Integer billId, String paymentStatus) {
+        return paymentRepository.findByBill_BillIdAndPaymentStatus(billId, paymentStatus);
+    }
 
     public List<Payment> getAllPayments() {
     	 List<Payment> payments = paymentRepository.findAll();
