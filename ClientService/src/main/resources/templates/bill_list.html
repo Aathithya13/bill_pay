@@ -85,21 +85,30 @@
             color: #007bff;
             flex: 1;
         }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background: #0056b3;
-        }
+		button {
+		    padding: 8px 16px;
+		    background: #007bff;
+		    color: #fff;
+		    border: none;
+		    border-radius: 8px;
+		    font-size: 14px;
+		    cursor: pointer;
+		    margin-top: 10px;
+		    margin-bottom: 10px;
+		}
+
+		button:hover {
+		    background: #0056b3;
+		}
+
+		/* Align the buttons to the right */
+		.button-container {
+		    display: flex;
+		    justify-content: flex-end; /* Aligns items to the right */
+		    gap: 10px; /* Optional: adds spacing between the buttons */
+		}
+
+
     </style>
 </head>
 <body>
@@ -258,11 +267,24 @@
             </ul>
         </div>
 
-        <form th:if="${balanceAmount > 0}" th:action="@{/create}" method="GET">
-            <input type="hidden" name="billId" th:value="${bill.billId}" />
-            <input type="hidden" name="finalamount" th:value="${bill.finalamount}" />
-            <button type="submit" class="btn">Make Payment</button>
-        </form>
+        
+		
+		<!-- Container for buttons -->
+		<div class="button-container">
+		    <!-- Home Button -->
+		    <a th:href="@{/}">
+		        <button type="button" class="btn">Home</button>
+		    </a>
+
+		    <!-- Make Payment Button -->
+		    <form th:if="${balanceAmount > 0}" th:action="@{/create}" method="GET">
+		        <input type="hidden" name="billId" th:value="${bill.billId}" />
+		        <input type="hidden" name="balanceAmount" th:value="${balanceAmount}" />
+		        <button type="submit" class="btn">Make Payment</button>
+		    </form>
+		</div>
+
+
     </div>
 </body>
 </html>

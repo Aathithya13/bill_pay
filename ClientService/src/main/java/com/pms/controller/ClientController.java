@@ -428,10 +428,10 @@ public class ClientController {
     
     @RequestMapping("/create")
     public String showCreatePage(@RequestParam("billId") String billId, 
-                                  @RequestParam("finalamount") double finalamount, 
+                                  @RequestParam("balanceAmount") double balanceAmount, 
                                   Model model) {
         model.addAttribute("billId", billId);
-        model.addAttribute("finalamount", finalamount);
+        model.addAttribute("balanceAmount", balanceAmount);
        
         return "createpayment";
         
@@ -479,6 +479,7 @@ public class ClientController {
                     Payment[].class
             );
             if (response.getBody() != null && response.getBody().length > 0) {
+            	model.addAttribute("billid",billId);
                 model.addAttribute("payments", Arrays.asList(response.getBody()));
             } else {
                 model.addAttribute("errorMessage", "No payments found matching the criteria.");
