@@ -38,8 +38,16 @@ public class Bill {
 	
     private float taxPercentage;
     private double taxableamount;
+    private double amountPaid;   
+    
+    
 	
-	
+	public double getAmountPaid() {
+		return amountPaid;
+	}
+	public void setAmountPaid(double amountPaid) {
+		this.amountPaid = amountPaid;
+	}
 	public Set<Payment> getPayList() {
 		return payList;
 	}

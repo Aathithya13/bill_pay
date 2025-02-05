@@ -126,6 +126,7 @@ public class ClientController {
              billobj = response.getBody(); // Get the created bill object from the response
 
          } catch (HttpClientErrorException e) {
+        	 System.out.println("HttpClientErrorException");
         	 if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
                  // 404 error
                  model.addAttribute("errorMessage", "Pls Enter Valid Appointment Id  ");
@@ -139,21 +140,27 @@ public class ClientController {
              return "statuspage_bill"; // Redirect to an error page
          } catch (HttpServerErrorException e) {
              // Handle server errors (5xx)
+        	 System.out.println("HttpServerErrorException");
              model.addAttribute("errorMessage", "Server error: " + e.getMessage());
              return "statuspage_bill"; // Redirect to an error page
          } catch (Exception e) {
              // Handle unexpected errors
+        	 System.out.println("Exception");
              model.addAttribute("errorMessage", "Unexpected error: " + e.getMessage());
              return "statuspage_bill"; // Redirect to an error page
          }
 
          // If the bill was created successfully, show a success page
          if (billobj != null) {
-        	 
              model.addAttribute("bill", billobj); // Optionally add the newly created bill to the model
+             
+             double balanceAmount = billobj.getFinalamount() - billobj.getAmountPaid();
+        	 model.addAttribute("balanceAmount", balanceAmount);
+             System.out.println(balanceAmount);
              return "bill_list"; // A confirmation page to show the bill details
          } else {
              // If the bill wasn't created, show an error message
+        	 System.out.println("Some exception occurend in submitbill method");
              model.addAttribute("errorMessage", "Failed to create the bill. Try again.");
              return "statuspage_bill"; // Redirect to an error page
          }
@@ -262,7 +269,7 @@ public class ClientController {
 	    List<Bill> bills = null;
 
 	   
-	    String url = "http://localhost:8080/bills/patient/" + patientId;
+	    String url = "http://localhost:8082/bills/patient/" + patientId;
 	    
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.set("Content-Type", "application/json");
@@ -382,6 +389,9 @@ public class ClientController {
 
 	    if (bill != null) {
 	        model.addAttribute("bill", bill);
+	        double balanceAmount = bill.getFinalamount() - bill.getAmountPaid();
+       	 model.addAttribute("balanceAmount", balanceAmount);
+            System.out.println(balanceAmount);
 	        return "bill_list";
 	    } else {
 	        model.addAttribute("errorMessage", "No bill details found with the given ID.");
