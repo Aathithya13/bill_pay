@@ -178,6 +178,9 @@ public class Bill {
 	public void setAmountPaid(double amountPaid) {
 		this.amountPaid = amountPaid;
 	}
+	public void setFinalamount(double finalamount) {
+		this.finalamount = finalamount;
+	}
 	
 	
 	

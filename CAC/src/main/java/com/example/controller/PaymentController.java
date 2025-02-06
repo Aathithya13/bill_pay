@@ -117,7 +117,7 @@ public class PaymentController {
                      Bill bill = payment.getBill();
                      paymentService.updatePaymentStatus(bill.getBillId());
                      double balanceAmount = bill.getFinalamount() - bill.getAmountPaid();
-                     String userEmail = "aathi22004@gmail.com"; 
+                     String userEmail = "anshitagupta2277@gmail.com"; 
                      emailNotificationService.sendPaymentSuccessEmail(
                              userEmail, razorpayPaymentId, razorpayOrderId, payment.getAmount(), bill.getBillId(), balanceAmount
                      );
@@ -134,7 +134,7 @@ public class PaymentController {
                      payment.setPaymentStatus("UnSuccess");
                      paymentService.savePayment(payment);
 
-                     String userEmail = "aathi22004@gmail.com"; 
+                     String userEmail = "anshitagupta2277@gmail.com"; 
                      emailNotificationService.sendPaymentFailureEmail(
                              userEmail, razorpayOrderId, "Invalid payment signature.", payment.getBill().getBillId()
                      );
@@ -149,7 +149,7 @@ public class PaymentController {
                  payment.setPaymentStatus("Failed");
                  paymentService.savePayment(payment);
 
-                 String userEmail = "aathi22004@gmail.com"; 
+                 String userEmail = "anshitagupta2277@gmail.com"; 
                  emailNotificationService.sendPaymentFailureEmail(
                          userEmail, razorpayOrderId, e.getMessage(), payment.getBill().getBillId()
                  );
@@ -171,7 +171,7 @@ public class PaymentController {
         	int billId = Integer.parseInt(payload.get("billId").toString());
             String orderId = (String) payload.get("orderId");
             String failureReason = (String) payload.get("message");
-            String userEmail = "aathi22004@gmail.com"; 
+            String userEmail = "anshitagupta2277@gmail.com"; 
             emailNotificationService.sendPaymentFailureEmail(userEmail, orderId, failureReason, billId);
 
             response.put("message", "Failure notification sent successfully!");
@@ -230,7 +230,10 @@ public class PaymentController {
             if (payments.isEmpty()) {
                 throw new UserNotFoundException(message);
             }
-
+           for(Payment p:payments)
+           {
+        	   System.out.println("done");
+           }
             return ResponseEntity.ok(payments);
         } catch (UserNotFoundException ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
